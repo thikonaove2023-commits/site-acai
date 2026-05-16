@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universo do Açaí</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(rgba(26,1,43,0.7), rgba(76,12,122,0.7)), url('fundo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color:white;
+  display:flex;
+  justify-content:center;
+}
+
+.container{max-width:420px;padding:20px}
+
+.logo img{
+  width:160px;height:160px;object-fit:cover;border-radius:50%;
+  border:3px solid white;box-shadow:0 0 25px rgba(255,255,255,0.4);
+  display:block;margin:auto;
+}
+
+.title{text-align:center;margin-top:10px}
+.title h1{font-size:24px}
+.title p{font-size:14px;color:#fff}
+
+.buttons{margin-top:25px;display:flex;flex-direction:column;gap:15px}
+
+.btn{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px;border-radius:18px;
+  background: linear-gradient(135deg,#7b2cbf,#9d4edd);
+  border:none;color:white;cursor:pointer;font-weight:600;
+  animation:fadeUp 0.6s ease forwards;opacity:0;
+  position:relative;overflow:hidden;
+}
+}
+
+.btn:nth-child(1){animation-delay:0.1s}
+.btn:nth-child(2){animation-delay:0.2s}
+.btn:nth-child(3){animation-delay:0.3s}
+.btn:nth-child(4){animation-delay:0.4s}
+.btn:nth-child(5){animation-delay:0.5s}
+
+.btn:hover{transform:scale(1.06)}
+
+.secondary{background:rgba(0,0,0,0.4)}
+
+.features{
+  margin-top:25px;background:rgba(0,0,0,0.4);
+  border-radius:20px;padding:15px;
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center
+}
+
+.footer{text-align:center;margin-top:20px;font-size:12px}
+
+/* MODAL CARDÁPIO */
+.modal{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;align-items:center;justify-content:center;
+}
+
+.modal-content{
+  background:#2b0a4a;padding:20px;border-radius:20px;
+  width:90%;max-width:350px;text-align:center;
+}
+
+.close{margin-top:10px;cursor:pointer;color:#fff}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;bottom:20px;right:20px;
+  background:#25D366;width:60px;height:60px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:28px;cursor:pointer
+}
+
+/* PARTICULAS */
+canvas{position:fixed;top:0;left:0;z-index:-1}
+
+@keyframes fadeUp{
+  from{transform:translateY(20px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+
+/* EFEITO CLICK (RIPPLE) */
+.btn::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:0;
+  border-radius:50%;
+  background:rgba(255,255,255,0.4);
+  transform:translate(-50%,-50%);
+  top:50%;left:50%;
+  opacity:0;
+}
+
+.btn:active::after{
+  width:200px;
+  height:200px;
+  opacity:1;
+  transition:0.4s;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="container">
+
+<div class="logo">
+  <img src="logo.png">
+</div>
+
+<div class="title">
+  <h1>Universo do Açaí 💜</h1>
+  <p>Mais que açaí, é um universo de sabor ✨</p>
+</div>
+
+<div class="buttons">
+
+<button class="btn" onclick="irPara('https://wa.me/5599999999999')">
+      <div>
+        PEDIR
+        <span>WhatsApp</span>
+      </div>
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" style="width:24px;">
+    </button>
+<button class="btn secondary" onclick="irPara('https://instagram.com')">
+      <div>
+        INSTAGRAM
+        <span>Nos siga</span>
+      </div>
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" style="width:24px;">
+    </button>
+<button class="btn secondary" onclick="irPara('https://www.ifood.com.br')">
+      <div>
+        IFOOD
+        <span>Peça online</span>
+      </div>
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968267.png" style="width:24px;">
+    </button>
+<button class="btn secondary" onclick="irPara('https://maps.google.com')">
+      <div>
+        LOCALIZAÇÃO
+        <span>Como chegar</span>
+      </div>
+      <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" style="width:24px;">
+    </button>
+
+
+</div>
+
+<div class="features">
+  <div>🍇 Qualidade</div>
+  <div>🥣 Fresco</div>
+  <div>💜 Amor</div>
+  <div>⚡ Rápido</div>
+</div>
+
+<div class="footer">© Universo do Açaí</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="cardapio">
+  <div class="modal-content">
+    <h2>Cardápio 🍇</h2>
+    <p>Açaí 300ml - R$10</p>
+    <p>Açaí 500ml - R$15</p>
+    <p>Açaí 700ml - R$20</p>
+    <div class="close" onclick="fecharCardapio()">Fechar</div>
+  </div>
+</div>
+
+<div class="whatsapp" onclick="irPara('https://wa.me/5599999999999')">💬</div>
+
+<script>
+function irPara(link){window.location.href=link}
+
+function abrirCardapio(){document.getElementById('cardapio').style.display='flex'}
+function fecharCardapio(){document.getElementById('cardapio').style.display='none'}
+
+// PARTICULAS
+const c=document.getElementById('bg');
+const ctx=c.getContext('2d');
+c.width=window.innerWidth;c.height=window.innerHeight;
+let particles=[];
+for(let i=0;i<60;i++){
+  particles.push({x:Math.random()*c.width,y:Math.random()*c.height,r:2})
+}
+function draw(){
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.fillStyle='white';
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+    p.y+=0.3;
+    if(p.y>c.height)p.y=0;
+  })
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
+
+
